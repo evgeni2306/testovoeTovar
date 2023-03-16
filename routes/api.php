@@ -23,3 +23,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/registration', [RegistrationController::class, 'registration']);
 Route::post('/login', [AuthorizationController::class, 'login']);
 Route::post('/category/create', [CategoryController::class, 'create']);
+Route::get('/category/list', [CategoryController::class, 'getList']);

@@ -5,21 +5,19 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCategoriesTable extends Migration
+class CreateProductCategoriesTable extends Migration
 {
-    const TABLE_NAME = "categories";
+    const TABLE_NAME = "product_categories";
 
-    public function up(): void
+    public function up():void
     {
         Schema::create(self::TABLE_NAME, function (Blueprint $table) {
             $table->id();
-            $table->foreignId('creator_id')->constrained('users');
-            $table->string('name', 255)->nullable(false)->unique();
             $table->timestamps();
         });
     }
 
-    public function down(): void
+    public function down():void
     {
         Schema::dropIfExists(self::TABLE_NAME);
     }

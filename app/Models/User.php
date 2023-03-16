@@ -1,9 +1,9 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Hash;
 
@@ -25,17 +25,17 @@ class User extends Authenticatable
         'password',
     ];
 
-    public function setPasswordAttribute($password)
+    public function setPasswordAttribute($password):void
     {
         $this->attributes['password'] = Hash::make($password);
     }
 
-    public function setAuthKeyAttribute($authKey)
+    public function setAuthKeyAttribute($authKey):void
     {
         $this->attributes['authKey'] = Hash::make($authKey . self::KEY);
     }
 
-    static function getIdByKey($authKey)
+    static function getIdByKey($authKey):int
     {
         return self::query()->where('authKey', $authKey)->select('id')->get()[0]->id;
     }
