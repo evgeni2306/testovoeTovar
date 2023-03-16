@@ -26,9 +26,22 @@ class Stat extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function deleteWithDependencies(int $statId): void
+    static function deleteWithDependencies(int $statId): void
     {
         StatValue::query()->where('stat_id', '=', $statId)->delete();
         self::query()->find($statId)->delete();
+    }
+
+    static function updateProductStats(Stat $stat): void
+    {
+        $products = Product::query()
+            ->join('product_categories', 'product_id', '=', 'products.id')
+            ->join('categories', 'categories.id', '=', 'category_id')
+            ->select('products.id')
+            ->where('category_id', '=', $stat->category_id)
+            ->get()->all();
+        foreach ($products as $product) {
+            StatValue::query()->create(['product_id' => $product->id, 'stat_id' => $stat->id]);
+        }
     }
 }

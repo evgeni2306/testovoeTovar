@@ -24,6 +24,7 @@ class StatController extends Controller
         }
         $userId = User::getIdByKey($fields['authKey']);
         $stat = Stat::query()->create(['creator_id' => $userId, 'category_id' => $fields['categoryId'], 'name' => $fields['name']]);
+        Stat::updateProductStats($stat);
         return response()->json(['statId' => $stat->id], 200, ['Content-Type' => 'string']);
     }
 
@@ -54,7 +55,7 @@ class StatController extends Controller
         }
         $stat = Stat::query()->find($fields['statId']);
         $stat->name = $fields['name'];
-        $stat-> save();
+        $stat->save();
         return response()->json(['message' => 'обновлено'], 200, ['Content-Type' => 'string']);
     }
 }
