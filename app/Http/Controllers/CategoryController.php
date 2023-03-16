@@ -38,4 +38,5 @@ class CategoryController extends Controller
         }
         return response()->json($categories, 200, ['Content-Type' => 'array']);
     }
+
 }

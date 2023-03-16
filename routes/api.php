@@ -27,4 +27,7 @@ Route::post('/login', [AuthorizationController::class, 'login']);
 Route::post('/category/create', [CategoryController::class, 'create']);
 Route::get('/category/list', [CategoryController::class, 'getList']);
 
+
 Route::post('/product/create', [ProductController::class, 'create']);
+Route::get('/product/list', [ProductController::class, 'list']);
+Route::get('/product={id}', [ProductController::class, 'view']);

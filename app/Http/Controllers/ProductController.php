@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
-use http\Env\Response;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -31,5 +30,20 @@ class ProductController extends Controller
         $product = Product::query()->create($fields);
         Category::connectionToProduct($product->id, $fields['categories']);
         return response()->json($product->id, 200, ['Content-Type' => 'string']);
+    }
+
+    public function list(): JsonResponse
+    {
+        $products = Product::query()->get(['id', 'name', 'price', 'amount'])->all();
+        return response()->json($products, 200, ['Content-Type' => 'string']);
+    }
+
+    public function view($id): JsonResponse
+    {
+        $product = Product::query()->find($id);
+        if ($product === null) {
+            return response()->json(['message' => 'Выбранный товар не найден'], 404, ['Content-Type' => 'string']);
+        }
+        return response()->json($product, 200, ['Content-Type' => 'string']);
     }
 }
