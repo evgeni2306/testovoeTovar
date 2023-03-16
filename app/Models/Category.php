@@ -25,16 +25,7 @@ class Category extends Model
         return $this->hasMany(Stat::class);
     }
 
-    static function connectionToProduct(int $productId, array $categories):void
-    {
-        foreach ($categories as $item) {
-            ProductCategory::query()->create(['product_id' => $productId, 'category_id' => $item]);
-            $category = self::query()->find($item);
-            foreach ($category->getStats as $stat) {
-                StatValue::query()->create(['product_id' => $productId, 'stat_id' => $stat->id]);
-            }
-        }
-    }
+
 
     static function deleteWithDependencies(int $categoryId):void
     {

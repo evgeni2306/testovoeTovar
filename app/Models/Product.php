@@ -66,8 +66,18 @@ class Product extends Model
         ProductCategory::query()->create(['product_id' => $productId, 'category_id' => $categoryId]);
         $stats = Stat::query()->where('category_id', '=', $categoryId)->get()->all();
         foreach ($stats as $stat) {
-            StatValue::query()->create(['product_id'=>$productId,'stat_id'=>$stat->id]);
+            StatValue::query()->create(['product_id' => $productId, 'stat_id' => $stat->id]);
         }
+    }
+
+    static function updateProduct(array $fields): void
+    {
+        $product = Product::query()->find($fields['productId']);
+        $product->name = $fields['name'];
+        $product->price = $fields['price'];
+        $product->amount = $fields['amount'];
+        $product->description = $fields['description'];
+        $product->save();
     }
 
 

@@ -150,7 +150,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../tovartest" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../yii" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -181,7 +181,7 @@
       <updated>1678886174994</updated>
       <workItem from="1678886176029" duration="1407000" />
       <workItem from="1678943744689" duration="330000" />
-      <workItem from="1678956672827" duration="2540000" />
+      <workItem from="1678956672827" duration="24508000" />
     </task>
     <servers />
   </component>
@@ -200,13 +200,17 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
-    <state x="550" y="196" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1678955828163">
+    <state x="446" y="119" key="#Inspections" timestamp="1678965989444">
       <screen x="0" y="0" width="1638" height="882" />
     </state>
-    <state x="550" y="196" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1638.882@0.0.1638.882" timestamp="1678955828163" />
-    <state x="600" y="196" key="FileChooserDialogImpl" timestamp="1678956677130">
+    <state x="446" y="119" key="#Inspections/0.0.1638.882@0.0.1638.882" timestamp="1678965989444" />
+    <state x="550" y="196" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1678975064146">
       <screen x="0" y="0" width="1638" height="882" />
     </state>
-    <state x="600" y="196" key="FileChooserDialogImpl/0.0.1638.882@0.0.1638.882" timestamp="1678956677130" />
+    <state x="550" y="196" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1638.882@0.0.1638.882" timestamp="1678975064146" />
+    <state x="600" y="196" key="FileChooserDialogImpl" timestamp="1678984279325">
+      <screen x="0" y="0" width="1638" height="882" />
+    </state>
+    <state x="600" y="196" key="FileChooserDialogImpl/0.0.1638.882@0.0.1638.882" timestamp="1678984279325" />
   </component>
 </project>
