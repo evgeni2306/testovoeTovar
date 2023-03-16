@@ -30,13 +30,19 @@ class CategoryController extends Controller
         return response()->json($category->id, 200, ['Content-Type' => 'string']);
     }
 
-    public function getList(): JsonResponse
+    public function list(): JsonResponse
     {
         $categories = Category::query()->get(['id', 'name'])->all();
-        foreach ($categories as $item) {
-            $item->stats = $item->getStats;
-        }
         return response()->json($categories, 200, ['Content-Type' => 'array']);
+    }
+    public function view(int $id): JsonResponse
+    {
+        $category = Category::query()->find($id);
+        if ($category === null) {
+            return response()->json(['message' => 'Выбранная категория не найдена'], 404, ['Content-Type' => 'string']);
+        }
+        $category->stats = $category->getStats;
+        return response()->json($category, 200, ['Content-Type' => 'string']);
     }
 
 }

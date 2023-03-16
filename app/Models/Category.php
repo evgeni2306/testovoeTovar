@@ -16,6 +16,8 @@ class Category extends Model
     ];
     protected $hidden = [
         'getStats',
+        'created_at',
+        'updated_at'
     ];
 
     public function getStats(): \Illuminate\Database\Eloquent\Relations\HasMany

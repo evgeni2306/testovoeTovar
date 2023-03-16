@@ -38,12 +38,18 @@ class ProductController extends Controller
         return response()->json($products, 200, ['Content-Type' => 'string']);
     }
 
-    public function view($id): JsonResponse
+    public function view(int $id): JsonResponse
     {
         $product = Product::query()->find($id);
         if ($product === null) {
             return response()->json(['message' => 'Выбранный товар не найден'], 404, ['Content-Type' => 'string']);
         }
         return response()->json($product, 200, ['Content-Type' => 'string']);
+    }
+
+    public function listByCategory(int $id): JsonResponse
+    {
+        $products = Product::findByCategorie($id);
+        return response()->json($products, 200, ['Content-Type' => 'string']);
     }
 }
