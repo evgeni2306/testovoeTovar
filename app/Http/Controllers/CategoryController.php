@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use App\Models\Stat;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -54,7 +53,24 @@ class CategoryController extends Controller
             return response()->json(['message' => $validator->errors()->first()], 404, ['Content-Type' => 'string']);
         }
         Category::deleteWithDependencies((int)$fields['categoryId']);
-        return response()->json(['message'=>'deleted'], 200, ['Content-Type' => 'string']);
+        return response()->json(['message' => 'deleted'], 200, ['Content-Type' => 'string']);
+    }
+
+    public function update(Request $request): JsonResponse
+    {
+        $fields = $request->all();
+        $validator = Validator::make($fields, [
+            'authKey' => 'required|string|max:255|exists:users,authKey',
+            'categoryId' => 'required|integer|exists:categories,id',
+            'name' => 'required|string|max:255|unique:categories,name',
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['message' => $validator->errors()->first()], 404, ['Content-Type' => 'string']);
+        }
+        $category = Category::query()->find($fields['categoryId']);
+        $category->name = $fields['name'];
+        $category->save();
+        return response()->json(['message' => 'обновлено'], 200, ['Content-Type' => 'string']);
     }
 
 }

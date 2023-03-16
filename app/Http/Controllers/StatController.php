@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Stat;
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -26,7 +27,7 @@ class StatController extends Controller
         return response()->json(['statId' => $stat->id], 200, ['Content-Type' => 'string']);
     }
 
-    public function delete(Request $request)
+    public function delete(Request $request): JsonResponse
     {
         $fields = $request->all();
         $validator = Validator::make($fields, [
@@ -38,5 +39,22 @@ class StatController extends Controller
         }
         Stat::deleteWithDependencies((int)$fields['statId']);
         return response()->json(['message' => 'deleted'], 200, ['Content-Type' => 'string']);
+    }
+
+    public function update(Request $request): JsonResponse
+    {
+        $fields = $request->all();
+        $validator = Validator::make($fields, [
+            'authKey' => 'required|string|max:255|exists:users,authKey',
+            'name' => 'required|string|max:255',
+            'statId' => 'required|integer|exists:categories,id',
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['message' => $validator->errors()->first()], 404, ['Content-Type' => 'string']);
+        }
+        $stat = Stat::query()->find($fields['statId']);
+        $stat->name = $fields['name'];
+        $stat-> save();
+        return response()->json(['message' => 'обновлено'], 200, ['Content-Type' => 'string']);
     }
 }

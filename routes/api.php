@@ -26,6 +26,7 @@ Route::post('/registration', [RegistrationController::class, 'registration']);
 Route::post('/login', [AuthorizationController::class, 'login']);
 
 Route::post('/category/create', [CategoryController::class, 'create']);
+Route::post('/category/update', [CategoryController::class, 'update']);
 Route::post('/category/delete', [CategoryController::class, 'delete']);
 Route::get('/category/list', [CategoryController::class, 'list']);
 Route::get('/category={id}', [CategoryController::class, 'view']);
@@ -38,4 +39,5 @@ Route::get('/product={id}', [ProductController::class, 'view']);
 Route::get('/product/category={id}', [ProductController::class, 'listByCategory']);
 
 Route::post('/stat/create', [StatController::class, 'create']);
+Route::post('/stat/update', [StatController::class, 'update']);
 Route::post('/stat/delete', [StatController::class, 'delete']);

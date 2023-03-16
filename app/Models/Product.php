@@ -20,7 +20,8 @@ class Product extends Model
     ];
     protected $hidden = [
         'created_at',
-        'updated_at'
+        'updated_at',
+        'getStats'
     ];
 
     static function findByCategorie(int $categoryId): Collection
@@ -33,11 +34,16 @@ class Product extends Model
             ->get();
     }
 
-    static function deleteWithDependencies(int $productId):void
+    static function deleteWithDependencies(int $productId): void
     {
         ProductCategory::query()->where('product_id', '=', $productId)->delete();
-        StatValue::query()->where('product_id','=',$productId)->delete();
+        StatValue::query()->where('product_id', '=', $productId)->delete();
         self::query()->find($productId)->delete();
+    }
+
+    public function getStats(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(StatValue::class);
     }
 
 }

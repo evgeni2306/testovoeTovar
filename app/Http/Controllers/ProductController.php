@@ -44,6 +44,7 @@ class ProductController extends Controller
         if ($product === null) {
             return response()->json(['message' => 'Выбранный товар не найден'], 404, ['Content-Type' => 'string']);
         }
+        $product->stats = $product->getStats;
         return response()->json($product, 200, ['Content-Type' => 'string']);
     }
 
@@ -65,5 +66,23 @@ class ProductController extends Controller
         }
         Product::deleteWithDependencies((int)$fields['categoryId']);
         return response()->json(['message' => 'deleted'], 200, ['Content-Type' => 'string']);
+    }
+
+    public function update(Request $request): JsonResponse
+    {
+        $fields = $request->all();
+        $validator = Validator::make($fields, [
+            'authKey' => 'required|string|max:255|exists:users,authKey',
+            'productId' => 'required|integer|exists:products,id',
+            'name' => 'string|max:255|unique:categories,name',
+            'price' => 'integer',
+            'amount' => 'integer',
+            'description' => 'string',
+            'categories' => 'array',
+            'categories.*' => 'integer|exists:categories,id'
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['message' => $validator->errors()->first()], 404, ['Content-Type' => 'string']);
+        }
     }
 }
