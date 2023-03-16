@@ -4,9 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Hash;
 
-class User extends Model
+class User extends Authenticatable
 {
     use HasFactory;
 
@@ -17,7 +18,7 @@ class User extends Model
         'surname',
         'login',
         'password',
-        'key',
+        'authKey',
     ];
 
     protected $hidden = [
@@ -29,13 +30,13 @@ class User extends Model
         $this->attributes['password'] = Hash::make($password);
     }
 
-    public function setKeyAttribute($key)
+    public function setAuthKeyAttribute($authKey)
     {
-        $this->attributes['key'] = Hash::make($key . self::KEY);
+        $this->attributes['authKey'] = Hash::make($authKey . self::KEY);
     }
 
-    static function getIdByKey($key)
+    static function getIdByKey($authKey)
     {
-        return self::query()->where('key', $key)->select('id')->get()[0]->id;
+        return self::query()->where('authKey', $authKey)->select('id')->get()[0]->id;
     }
 }

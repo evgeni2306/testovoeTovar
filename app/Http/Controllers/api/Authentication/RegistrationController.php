@@ -1,17 +1,19 @@
 <?php
-
-namespace App\Http\Controllers\api;
+declare(strict_types=1);
+namespace App\Http\Controllers\api\Authentication;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class RegistrationController extends Controller
 {
-    public function registration(Request $request): \Illuminate\Http\JsonResponse
+    public function registration(Request $request): JsonResponse
     {
-        $validator = Validator::make($request->all(), [
+        $fields = $request->all();
+        $validator = Validator::make($fields, [
             'name' => 'required|string|max:255',
             'surname' => 'required|string|max:255',
             'login' => 'required|string|max:255|unique:users,login',
@@ -22,9 +24,8 @@ class RegistrationController extends Controller
             return response()->json(['message' => $validator->errors()->first()], 404, ['Content-Type' => 'string']);
 
         }
-        $fields = $request->all();
-        $fields['key'] = time();
+        $fields['authKey'] = time();
         $user = User::query()->create($fields);
-        return response()->json(['key' => $user['key']], 200, ['Content-Type' => 'string']);
+        return response()->json(['authKey' => $user['authKey']], 200, ['Content-Type' => 'string']);
     }
 }

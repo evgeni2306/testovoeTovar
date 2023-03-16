@@ -1,6 +1,6 @@
 <?php
-
-namespace App\Http\Controllers\api;
+declare(strict_types=1);
+namespace App\Http\Controllers\api\Authentication;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
@@ -12,15 +12,16 @@ class AuthorizationController extends Controller
 {
     public function login(Request $request): JsonResponse
     {
-        $validator = Validator::make($request->all(), [
+        $fields = $request->all('login', 'password');
+        $validator = Validator::make($fields, [
             'login' => 'required|string|max:255',
             'password' => 'required|string',
         ]);
         if ($validator->fails()) {
             return response()->json(['message' => $validator->errors()->first()], 404, ['Content-Type' => 'string']);
         }
-        if (Auth::attempt($request->all('login', 'password'))) {
-            return response()->json(['key' => Auth::user()->key], 200, ['Content-Type' => 'string']);
+        if (Auth::attempt($fields)) {
+            return response()->json(['authKey' => Auth::user()->authKey], 200, ['Content-Type' => 'string']);
         }
         return response()->json([['message' => 'Не удалось авторизоваться, проверьте правильность заполнения полей']], 404, ['Content-Type' => 'string']);
     }

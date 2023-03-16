@@ -11,6 +11,9 @@
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-normalizer" />
@@ -129,7 +132,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Diplom" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../tovartest" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -138,6 +141,11 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\php\OpenServer\domains\tovar\app\Http\Controllers\api\Authentication" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
@@ -155,6 +163,7 @@
       <updated>1678886174994</updated>
       <workItem from="1678886176029" duration="1407000" />
       <workItem from="1678943744689" duration="330000" />
+      <workItem from="1678956672827" duration="329000" />
     </task>
     <servers />
   </component>
@@ -162,13 +171,13 @@
     <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="550" y="196" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1678943884483">
+    <state x="550" y="196" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1678955828163">
       <screen x="0" y="0" width="1638" height="882" />
     </state>
-    <state x="550" y="196" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1638.882@0.0.1638.882" timestamp="1678943884483" />
-    <state x="600" y="196" key="FileChooserDialogImpl" timestamp="1678943961111">
+    <state x="550" y="196" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1638.882@0.0.1638.882" timestamp="1678955828163" />
+    <state x="600" y="196" key="FileChooserDialogImpl" timestamp="1678956677130">
       <screen x="0" y="0" width="1638" height="882" />
     </state>
-    <state x="600" y="196" key="FileChooserDialogImpl/0.0.1638.882@0.0.1638.882" timestamp="1678943961111" />
+    <state x="600" y="196" key="FileChooserDialogImpl/0.0.1638.882@0.0.1638.882" timestamp="1678956677130" />
   </component>
 </project>
