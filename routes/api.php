@@ -34,6 +34,7 @@ Route::get('/category={id}', [CategoryController::class, 'view']);
 
 Route::post('/product/create', [ProductController::class, 'create']);
 Route::post('/product/delete', [ProductController::class, 'delete']);
+Route::post('/product/category/delete', [ProductController::class, 'deleteCategory']);
 Route::get('/product/list', [ProductController::class, 'list']);
 Route::get('/product={id}', [ProductController::class, 'view']);
 Route::get('/product/category={id}', [ProductController::class, 'listByCategory']);

@@ -46,4 +46,19 @@ class Product extends Model
         return $this->hasMany(StatValue::class);
     }
 
+    static function deleteCategoryConnection(int $productId, int $categoryId): void
+    {
+        $stats = Stat::query()->where('category_id', '=', $categoryId)->get()->all();
+        foreach ($stats as $stat) {
+            StatValue::query()
+                ->where('product_id', '=', $productId)
+                ->where('stat_id', '=', $stat->id)
+                ->delete();
+        }
+        ProductCategory::query()
+            ->where('product_id', '=', $productId)
+            ->where('category_id', '=', $categoryId)
+            ->delete();
+    }
+
 }
