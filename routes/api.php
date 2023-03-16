@@ -38,3 +38,4 @@ Route::get('/product={id}', [ProductController::class, 'view']);
 Route::get('/product/category={id}', [ProductController::class, 'listByCategory']);
 
 Route::post('/stat/create', [StatController::class, 'create']);
+Route::post('/stat/delete', [StatController::class, 'delete']);

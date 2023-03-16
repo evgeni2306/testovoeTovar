@@ -58,7 +58,7 @@ class ProductController extends Controller
         $fields = $request->all();
         $validator = Validator::make($fields, [
             'authKey' => 'required|string|max:255|exists:users,authKey',
-            'categoryId' => 'required|integer|exists:categories,id',
+            'productId' => 'required|integer|exists:products,id',
         ]);
         if ($validator->fails()) {
             return response()->json(['message' => $validator->errors()->first()], 404, ['Content-Type' => 'string']);

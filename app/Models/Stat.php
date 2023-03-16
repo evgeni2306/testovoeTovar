@@ -25,4 +25,10 @@ class Stat extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function deleteWithDependencies(int $statId): void
+    {
+        StatValue::query()->where('stat_id', '=', $statId)->delete();
+        self::query()->find($statId)->delete();
+    }
 }
