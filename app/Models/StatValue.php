@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -9,7 +9,8 @@ class StatValue extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'creator_id',
-        'name',
+        'product_id',
+        'stat_id',
+        'value'
     ];
 }

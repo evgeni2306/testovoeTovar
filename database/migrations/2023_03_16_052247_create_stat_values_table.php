@@ -15,7 +15,8 @@ class CreateStatValuesTable extends Migration
             $table->id();
             $table->foreignId('product_id')->constrained('products');
             $table->foreignId('stat_id')->constrained('stats');
-            $table->string('value', 255)->nullable(false);
+            $table->string('value', 255)->nullable(true);
+            $table->unique(['product_id','stat_id']);
             $table->timestamps();
         });
     }

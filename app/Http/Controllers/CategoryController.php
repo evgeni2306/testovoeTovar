@@ -30,9 +30,12 @@ class CategoryController extends Controller
         return response()->json($category->id, 200, ['Content-Type' => 'string']);
     }
 
-    public function getList():JsonResponse
+    public function getList(): JsonResponse
     {
-        $categories = Category::query()->get(['id','name'])->all();
-        return response()->json($categories,200,['Content-Type' => 'array']);
+        $categories = Category::query()->get(['id', 'name'])->all();
+        foreach ($categories as $item) {
+            $item->stats = $item->getStats;
+        }
+        return response()->json($categories, 200, ['Content-Type' => 'array']);
     }
 }

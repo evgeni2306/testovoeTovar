@@ -17,7 +17,7 @@ class CreateProductsTable extends Migration
             $table->string('name', 255)->nullable(false);
             $table->decimal('price')->nullable(false);
             $table->integer('amount')->nullable(false)->unsigned();
-            $table->string('description')->nullable(false);
+            $table->string('description')->nullable(true);
             $table->timestamps();
         });
     }

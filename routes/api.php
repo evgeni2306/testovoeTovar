@@ -3,6 +3,7 @@
 use App\Http\Controllers\api\Authentication\AuthorizationController;
 use App\Http\Controllers\api\Authentication\RegistrationController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,5 +23,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 Route::post('/registration', [RegistrationController::class, 'registration']);
 Route::post('/login', [AuthorizationController::class, 'login']);
+
 Route::post('/category/create', [CategoryController::class, 'create']);
 Route::get('/category/list', [CategoryController::class, 'getList']);
+
+Route::post('/product/create', [ProductController::class, 'create']);

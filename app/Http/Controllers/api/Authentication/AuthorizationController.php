@@ -21,7 +21,7 @@ class AuthorizationController extends Controller
             return response()->json(['message' => $validator->errors()->first()], 404, ['Content-Type' => 'string']);
         }
         if (Auth::attempt($fields)) {
-            return response()->json(['authKey' => Auth::user()->authKey], 200, ['Content-Type' => 'string']);
+            return response()->json(['authKey' => Auth::user()->authKey], 200);
         }
         return response()->json([['message' => 'Не удалось авторизоваться, проверьте правильность заполнения полей']], 404, ['Content-Type' => 'string']);
     }

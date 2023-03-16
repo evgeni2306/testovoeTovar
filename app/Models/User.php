@@ -32,7 +32,7 @@ class User extends Authenticatable
 
     public function setAuthKeyAttribute($authKey):void
     {
-        $this->attributes['authKey'] = Hash::make($authKey . self::KEY);
+        $this->attributes['authKey'] = hash("sha256",$authKey . self::KEY);
     }
 
     static function getIdByKey($authKey):int
