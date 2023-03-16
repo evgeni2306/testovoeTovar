@@ -26,12 +26,13 @@ Route::post('/registration', [RegistrationController::class, 'registration']);
 Route::post('/login', [AuthorizationController::class, 'login']);
 
 Route::post('/category/create', [CategoryController::class, 'create']);
-Route::get('/category/list', [CategoryController::class, 'list']);
 Route::post('/category/delete', [CategoryController::class, 'delete']);
+Route::get('/category/list', [CategoryController::class, 'list']);
 Route::get('/category={id}', [CategoryController::class, 'view']);
 
 
 Route::post('/product/create', [ProductController::class, 'create']);
+Route::post('/product/delete', [ProductController::class, 'delete']);
 Route::get('/product/list', [ProductController::class, 'list']);
 Route::get('/product={id}', [ProductController::class, 'view']);
 Route::get('/product/category={id}', [ProductController::class, 'listByCategory']);

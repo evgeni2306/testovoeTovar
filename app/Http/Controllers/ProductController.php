@@ -52,4 +52,18 @@ class ProductController extends Controller
         $products = Product::findByCategorie($id);
         return response()->json($products, 200, ['Content-Type' => 'string']);
     }
+
+    public function delete(Request $request)
+    {
+        $fields = $request->all();
+        $validator = Validator::make($fields, [
+            'authKey' => 'required|string|max:255|exists:users,authKey',
+            'categoryId' => 'required|integer|exists:categories,id',
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['message' => $validator->errors()->first()], 404, ['Content-Type' => 'string']);
+        }
+        Product::deleteWithDependencies((int)$fields['categoryId']);
+        return response()->json(['message' => 'deleted'], 200, ['Content-Type' => 'string']);
+    }
 }

@@ -54,7 +54,7 @@ class CategoryController extends Controller
             return response()->json(['message' => $validator->errors()->first()], 404, ['Content-Type' => 'string']);
         }
         Category::deleteWithDependencies((int)$fields['categoryId']);
-        return response()->json(5, 200, ['Content-Type' => 'string']);
+        return response()->json(['message'=>'deleted'], 200, ['Content-Type' => 'string']);
     }
 
 }

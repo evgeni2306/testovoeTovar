@@ -33,4 +33,11 @@ class Product extends Model
             ->get();
     }
 
+    static function deleteWithDependencies(int $productId):void
+    {
+        ProductCategory::query()->where('product_id', '=', $productId)->delete();
+        StatValue::query()->where('product_id','=',$productId)->delete();
+        self::query()->find($productId)->delete();
+    }
+
 }
