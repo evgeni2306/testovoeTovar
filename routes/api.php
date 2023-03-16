@@ -4,6 +4,7 @@ use App\Http\Controllers\api\Authentication\AuthorizationController;
 use App\Http\Controllers\api\Authentication\RegistrationController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\StatController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +27,7 @@ Route::post('/login', [AuthorizationController::class, 'login']);
 
 Route::post('/category/create', [CategoryController::class, 'create']);
 Route::get('/category/list', [CategoryController::class, 'list']);
+Route::post('/category/delete', [CategoryController::class, 'delete']);
 Route::get('/category={id}', [CategoryController::class, 'view']);
 
 
@@ -33,3 +35,5 @@ Route::post('/product/create', [ProductController::class, 'create']);
 Route::get('/product/list', [ProductController::class, 'list']);
 Route::get('/product={id}', [ProductController::class, 'view']);
 Route::get('/product/category={id}', [ProductController::class, 'listByCategory']);
+
+Route::post('/stat/create', [StatController::class, 'create']);

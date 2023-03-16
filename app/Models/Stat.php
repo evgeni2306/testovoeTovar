@@ -11,6 +11,7 @@ class Stat extends Model
     use HasFactory;
 
     protected $fillable = [
+        'creator_id',
         'category_id',
         'name',
     ];
@@ -19,13 +20,6 @@ class Stat extends Model
         'updated_at',
         'category_id'
     ];
-
-    static function createCategoriesStats(int $catId, array $stats): void
-    {
-        foreach ($stats as $item) {
-            self::query()->create(['category_id' => $catId, 'name' => $item]);
-        }
-    }
 
     public function category(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {

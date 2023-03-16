@@ -12,6 +12,7 @@ class CreateStatsTable extends Migration
     {
         Schema::create(self::TABLE_NAME, function (Blueprint $table) {
             $table->id();
+            $table->foreignId('creator_id')->constrained('users');
             $table->foreignId('category_id')->constrained('categories');
             $table->string('name', 255)->nullable(false);
             $table->timestamps();

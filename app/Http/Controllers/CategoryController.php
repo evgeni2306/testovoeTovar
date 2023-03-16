@@ -18,16 +18,13 @@ class CategoryController extends Controller
         $validator = Validator::make($fields, [
             'authKey' => 'required|string|max:255|exists:users,authKey',
             'name' => 'required|string|max:255|unique:categories,name',
-            'stats' => 'array',
-            'stats.*' => 'string|max:255',
         ]);
         if ($validator->fails()) {
             return response()->json(['message' => $validator->errors()->first()], 404, ['Content-Type' => 'string']);
         }
         $userId = User::getIdByKey($fields['authKey']);
         $category = Category::query()->create(['creator_id' => $userId, 'name' => $fields['name']]);
-        Stat::createCategoriesStats($category->id, $fields['stats']);
-        return response()->json($category->id, 200, ['Content-Type' => 'string']);
+        return response()->json(['categoryId' => $category->id], 200, ['Content-Type' => 'string']);
     }
 
     public function list(): JsonResponse
@@ -35,6 +32,7 @@ class CategoryController extends Controller
         $categories = Category::query()->get(['id', 'name'])->all();
         return response()->json($categories, 200, ['Content-Type' => 'array']);
     }
+
     public function view(int $id): JsonResponse
     {
         $category = Category::query()->find($id);
@@ -43,6 +41,20 @@ class CategoryController extends Controller
         }
         $category->stats = $category->getStats;
         return response()->json($category, 200, ['Content-Type' => 'string']);
+    }
+
+    public function delete(Request $request)
+    {
+        $fields = $request->all();
+        $validator = Validator::make($fields, [
+            'authKey' => 'required|string|max:255|exists:users,authKey',
+            'categoryId' => 'required|integer|exists:categories,id',
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['message' => $validator->errors()->first()], 404, ['Content-Type' => 'string']);
+        }
+        Category::deleteWithDependencies((int)$fields['categoryId']);
+        return response()->json(5, 200, ['Content-Type' => 'string']);
     }
 
 }

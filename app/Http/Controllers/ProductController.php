@@ -29,7 +29,7 @@ class ProductController extends Controller
         $fields['creator_id'] = User::getIdByKey($fields['authKey']);
         $product = Product::query()->create($fields);
         Category::connectionToProduct($product->id, $fields['categories']);
-        return response()->json($product->id, 200, ['Content-Type' => 'string']);
+        return response()->json(['productId' => $product->id], 200, ['Content-Type' => 'string']);
     }
 
     public function list(): JsonResponse

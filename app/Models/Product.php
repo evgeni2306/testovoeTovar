@@ -31,7 +31,6 @@ class Product extends Model
             ->select('products.id', 'products.name', 'price', 'amount')
             ->where('category_id', '=', $categoryId)
             ->get();
-
     }
 
 }
