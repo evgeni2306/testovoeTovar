@@ -82,6 +82,20 @@ class ProductController extends Controller
         Product::deleteCategoryConnection($fields['productId'], $fields['categoryId']);
         return response()->json(['message' => 'Товар был отвязан от категории'], 200, ['Content-Type' => 'string']);
     }
+    public function addCategory(Request $request)
+    {
+        $fields = $request->all();
+        $validator = Validator::make($fields, [
+            'authKey' => 'required|string|max:255|exists:users,authKey',
+            'productId' => 'required|integer|exists:products,id',
+            'categoryId' => 'integer|exists:categories,id',
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['message' => $validator->errors()->first()], 404, ['Content-Type' => 'string']);
+        }
+        Product::addCategoryConnection($fields['productId'], $fields['categoryId']);
+        return response()->json(['message' => 'Категория была привязана'], 200, ['Content-Type' => 'string']);
+    }
 
     public function update(Request $request): JsonResponse
     {

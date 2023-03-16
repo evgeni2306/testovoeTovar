@@ -61,4 +61,14 @@ class Product extends Model
             ->delete();
     }
 
+    static function addCategoryConnection(int $productId, int $categoryId): void
+    {
+        ProductCategory::query()->create(['product_id' => $productId, 'category_id' => $categoryId]);
+        $stats = Stat::query()->where('category_id', '=', $categoryId)->get()->all();
+        foreach ($stats as $stat) {
+            StatValue::query()->create(['product_id'=>$productId,'stat_id'=>$stat->id]);
+        }
+    }
+
+
 }
