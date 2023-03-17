@@ -48,7 +48,7 @@ class StatController extends Controller
         $validator = Validator::make($fields, [
             'authKey' => 'required|string|max:255|exists:users,authKey',
             'name' => 'required|string|max:255',
-            'statId' => 'required|integer|exists:categories,id',
+            'statId' => 'required|integer|exists:stats,id',
         ]);
         if ($validator->fails()) {
             return response()->json(['message' => $validator->errors()->first()], 404, ['Content-Type' => 'string']);

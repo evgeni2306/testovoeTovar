@@ -32,7 +32,7 @@ class CategoryController extends Controller
         return response()->json($categories, 200, ['Content-Type' => 'array']);
     }
 
-    public function view(int $id): JsonResponse
+    public function view($id): JsonResponse
     {
         $category = Category::query()->find($id);
         if ($category === null) {

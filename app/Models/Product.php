@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -24,14 +23,18 @@ class Product extends Model
         'getStats'
     ];
 
-    static function findByCategorie(int $categoryId): Collection
+    static function findByCategorie($categoryId)
     {
-        return Product::query()
+        $product = Product::query()
             ->join('product_categories', 'product_id', '=', 'products.id')
             ->join('categories', 'categories.id', '=', 'category_id')
             ->select('products.id', 'products.name', 'price', 'amount')
             ->where('category_id', '=', $categoryId)
-            ->get();
+            ->get()->all();
+        if (count($product) === 0) {
+            return null;
+        }
+        return $product;
     }
 
     static function deleteWithDependencies(int $productId): void

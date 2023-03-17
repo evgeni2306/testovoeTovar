@@ -36,7 +36,7 @@ class ProductController extends Controller
         return response()->json($products, 200, ['Content-Type' => 'string']);
     }
 
-    public function view(int $id): JsonResponse
+    public function view($id): JsonResponse
     {
         $product = Product::query()->find($id);
         if ($product === null) {
@@ -46,13 +46,16 @@ class ProductController extends Controller
         return response()->json($product, 200, ['Content-Type' => 'string']);
     }
 
-    public function listByCategory(int $id): JsonResponse
+    public function listByCategory($id): JsonResponse
     {
         $products = Product::findByCategorie($id);
+        if ($products === null) {
+            return response()->json(['message' => 'По выбранной категории товары не найдены'], 404, ['Content-Type' => 'string']);
+        }
         return response()->json($products, 200, ['Content-Type' => 'string']);
     }
 
-    public function delete(Request $request)
+    public function delete(Request $request): JsonResponse
     {
         $fields = $request->all();
         $validator = Validator::make($fields, [
@@ -62,11 +65,11 @@ class ProductController extends Controller
         if ($validator->fails()) {
             return response()->json(['message' => $validator->errors()->first()], 404, ['Content-Type' => 'string']);
         }
-        Product::deleteWithDependencies((int)$fields['categoryId']);
+        Product::deleteWithDependencies((int)$fields['productId']);
         return response()->json(['message' => 'deleted'], 200, ['Content-Type' => 'string']);
     }
 
-    public function deleteCategory(Request $request)
+    public function deleteCategory(Request $request): JsonResponse
     {
         $fields = $request->all();
         $validator = Validator::make($fields, [
@@ -81,7 +84,7 @@ class ProductController extends Controller
         return response()->json(['message' => 'Товар был отвязан от категории'], 200, ['Content-Type' => 'string']);
     }
 
-    public function addCategory(Request $request)
+    public function addCategory(Request $request): JsonResponse
     {
         $fields = $request->all();
         $validator = Validator::make($fields, [
@@ -118,7 +121,7 @@ class ProductController extends Controller
         $validator = Validator::make($fields, [
             'authKey' => 'required|string|max:255|exists:users,authKey',
             'productId' => 'required|integer|exists:products,id',
-            'name' => 'string|max:255|unique:categories,name',
+            'name' => 'string|max:255',
             'price' => 'integer',
             'amount' => 'integer',
             'description' => 'string',
